@@ -26,13 +26,33 @@ const Text = styled.div`
     `}
 `;
 
+const FlexView = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+`;
+
+const ViewAllButton = styled.div`
+  border-radius: 1rem;
+  background-color: ${colors.darkBlue};
+  color: ${colors.white};
+  text-align: center;
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+`;
+
 const UpcomingEvent = ({ events = [], date = Date.now() }) => {
   return (
     <UpcomingEventContainer>
       <UpcomingEventWrapper>
-        <Text color={colors.darkBlue} size="1rem">
-          Upcoming Events
-        </Text>
+        <FlexView>
+          <Text color={colors.darkBlue} size="1rem">
+            Upcoming Events
+          </Text>
+          <ViewAllButton>View all</ViewAllButton>
+        </FlexView>
         <Text color={colors.grey} size="0.75rem">
           {isSameDay(date, new Date())
             ? `Today, ${format(date, "d MMM")}`

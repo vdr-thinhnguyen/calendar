@@ -8,4 +8,6 @@ module.exports = {
   white: "#FFFFFF",
   grey: "#666",
   lightGrey: "#999",
+  lightestGrey: "#aaa",
+  dayBackground: "#A9F5F2",
 };

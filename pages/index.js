@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 import DesktopView from "@layouts/Desktop";
 import MobileView from "@layouts/Mobile";
 
 export default function Home() {
-  const [isMobileView, setIsMobileView] = useState(
-    typeof window !== "undefined" && window.innerWidth < 840
-  );
+  const [isMobileView, setIsMobileView] = useState();
+  const pageRef = useRef(null);
 
   const updateMedia = () => {
-    if (typeof window !== "undefined") {
-      setIsMobileView(window.innerWidth < 840);
+    if (pageRef.current) {
+      setIsMobileView(pageRef.current.clientWidth < 840);
     }
   };
 
@@ -24,6 +23,7 @@ export default function Home() {
         ? window.removeEventListener("resize", updateMedia)
         : null;
   }, []);
+
   return (
     <>
       <Head>
@@ -31,7 +31,9 @@ export default function Home() {
         <meta name="description" content="Calendar" />
       </Head>
 
-      <main>{isMobileView ? <MobileView /> : <DesktopView />}</main>
+      <main ref={pageRef}>
+        {isMobileView ? <MobileView /> : <DesktopView />}
+      </main>
     </>
   );
 }

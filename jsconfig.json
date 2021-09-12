@@ -9,6 +9,7 @@
             "@widgets/*": ["widgets/*"],
             "@configs/*": ["configs/*"],
             "@layouts/*": ["layouts/*"],
+            "@hooks/*": ["hooks/*"],
         }
     },
     "exclude": ["node_modules"]

@@ -24,11 +24,13 @@ const Row = styled.div`
 
 const DayWrapper = styled.div`
   text-align: center;
-  color: ${({ isSameMonth }) => (isSameMonth ? "#555" : "#aaa")};
+  color: ${({ isSameMonth }) =>
+    isSameMonth ? colors.grey : colors.lightestGrey};
   padding: 0.5rem 0;
-  ${({ size }) =>
+  ${({ size, isHasEvents }) =>
     size === CALENDAR_SIZE.NORMAL &&
     `
+    background-color: ${isHasEvents ? colors.dayBackground : "unset"};
     height: 6.5rem;
     border: 1px solid ${colors.grey};
     border-collapse: collapse; 
@@ -36,7 +38,11 @@ const DayWrapper = styled.div`
     &:nth-child(n+2) {
       margin-left: -1px;
     }
-  `}
+  `};
+  ${({ size, isHasEvents }) =>
+    size === CALENDAR_SIZE.NORMAL &&
+    isHasEvents &&
+    `background: ${colors.dayBackground}`}
 `;
 
 const Day = styled.div`
@@ -90,6 +96,7 @@ const CalendarCell = ({
       days.push(
         <DayWrapper
           isSameMonth={isSameMonth(day, monthStart)}
+          isHasEvents={eventsOfDay.length > 0}
           key={day}
           onClick={() => {
             size === CALENDAR_SIZE.SMALL && onDateClick(tempDay);
